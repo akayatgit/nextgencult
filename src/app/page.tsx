@@ -6,7 +6,7 @@ const SECTIONS = [
   { id: "hero", num: "01", title: "Home" },
   { id: "about", num: "02", title: "About" },
   { id: "lifestyle", num: "03", title: "Bootcamp" },
-  { id: "career", num: "04", title: "Learning Tracks" },
+  { id: "career", num: "04", title: "RoadMap" },
   { id: "community", num: "05", title: "Who It's For" },
   { id: "location", num: "06", title: "Why Different" },
   { id: "waitlist", num: "07", title: "Waitlist" },
