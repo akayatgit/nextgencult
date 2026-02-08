@@ -126,10 +126,13 @@ p {
 }
 
 .lead {
-  font-size: 0.95rem;
-  font-weight: 200;
-  max-width: 280px;
-  color: #6b6b6b;
+  font-size: 1.8rem;
+  font-weight: 500;
+  max-width: 500px;
+  color: #1d1d1f;
+  line-height: 1.4;
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
 
 /* ═══════════════════════════════════════
@@ -1489,8 +1492,9 @@ p {
   }
 
   .lead {
-    max-width: 240px;
-    font-size: 0.82rem;
+    max-width: 100%;
+    font-size: 1.4rem;
+    font-weight: 500;
   }
 
   .hero-cta-row {
@@ -1768,7 +1772,8 @@ p {
 
   .lead {
     max-width: 100%;
-    font-size: 0.88rem;
+    font-size: 1.5rem;
+    font-weight: 500;
   }
 
   .hero-cta-row {
@@ -1938,7 +1943,8 @@ p {
   }
 
   .lead {
-    font-size: 0.82rem;
+    font-size: 1.2rem;
+    font-weight: 500;
   }
 
   /* ── Hero refinements ── */
