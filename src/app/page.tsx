@@ -642,9 +642,9 @@ export default function Home() {
           </div>
 
           {/* Pricing Table */}
-          <div style={{ display: "flex", gap: "20px", marginTop: "16px", flexWrap: "wrap", justifyContent: "center", marginBottom: "40px" }}>
-            {/* Online Plan */}
-            <div className="block card sa sa-d1" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "28px 20px" }}>
+          <div style={{ display: "flex", gap: "20px", marginTop: "16px", flexWrap: "wrap", justifyContent: "center", marginBottom: "40px", alignItems: "stretch" }}>
+            {/* Online Plan - White */}
+            <div className="block card sa sa-d1" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "28px 20px", background: "#ffffff", display: "flex", flexDirection: "column" }}>
               <div style={{ position: "absolute", top: "14px", left: "14px", background: "#e5e5e5", padding: "5px 14px", borderRadius: "20px", fontSize: "0.7rem", fontWeight: "700", letterSpacing: "0.05em" }}>
                 ONLINE
               </div>
@@ -655,7 +655,7 @@ export default function Home() {
                 <p style={{ marginTop: "8px", fontSize: "0.85rem", fontWeight: "700", color: "#333" }}>(3 months)</p>
                 <p style={{ marginTop: "10px", fontSize: "0.88rem", color: "#666" }}>Perfect for learning from home</p>
               </div>
-              <div style={{ marginTop: "28px" }}>
+              <div style={{ marginTop: "28px", flex: "1" }}>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
@@ -687,143 +687,169 @@ export default function Home() {
                     </svg>
                     <span>Portfolio templates</span>
                   </li>
-                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "0.85rem", color: "#999" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem", color: "#dc2626" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <line x1="18" y1="6" x2="6" y2="18"></line>
                       <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
-                    <span>No placement assistance</span>
+                    <span style={{ color: "#dc2626" }}>No placement assistance</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem", color: "#dc2626" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span style={{ color: "#dc2626" }}>No hostel accommodation</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem", color: "#dc2626" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span style={{ color: "#dc2626" }}>No mock interviews</span>
                   </li>
                 </ul>
               </div>
-              <button className="btn primary" style={{ width: "100%", marginTop: "28px", padding: "12px 20px", fontSize: "0.9rem" }} onClick={() => scrollTo("waitlist")}>
+              <button className="btn primary" style={{ width: "100%", marginTop: "auto", padding: "12px 20px", fontSize: "0.9rem" }} onClick={() => scrollTo("waitlist")}>
                 Start Learning
               </button>
             </div>
 
-            {/* Hybrid Plan - Highlighted */}
-            <div className="block card sa sa-d2" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "28px 20px", border: "2px solid #ff6b2b", background: "linear-gradient(to bottom, rgba(255, 107, 43, 0.05), transparent)" }}>
-              <div style={{ position: "absolute", top: "14px", left: "14px", background: "linear-gradient(to right, #ff6b2b, #ff8c5a)", color: "#000", padding: "5px 14px", borderRadius: "20px", fontSize: "0.7rem", fontWeight: "700", letterSpacing: "0.05em" }}>
-                HYBRID
-              </div>
-              <div style={{ marginTop: "44px" }}>
-                <div style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.2rem)", fontWeight: "900", lineHeight: "1.2", marginBottom: "6px" }}>
-                  ₹16,666<span style={{ fontSize: "0.9rem", fontWeight: "400" }}>/month</span>
+            {/* Hybrid Plan - Yellow and Orange */}
+            <div className="block card sa sa-d2" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "0", border: "2px solid #ff6b2b", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+              <div style={{ background: "#FAD94E", padding: "28px 20px 20px", position: "relative" }}>
+                <div style={{ position: "absolute", top: "14px", left: "14px", background: "#ff6b2b", color: "#000", padding: "5px 14px", borderRadius: "20px", fontSize: "0.7rem", fontWeight: "700", letterSpacing: "0.05em" }}>
+                  HYBRID
                 </div>
-                <p style={{ marginTop: "8px", fontSize: "0.85rem", fontWeight: "700", color: "#333" }}>(3 months)</p>
-                <p style={{ marginTop: "10px", fontSize: "0.88rem", color: "#666" }}>Perfect for weekend acceleration</p>
+                <div style={{ marginTop: "44px" }}>
+                  <div style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.2rem)", fontWeight: "900", lineHeight: "1.2", marginBottom: "6px" }}>
+                    ₹16,666<span style={{ fontSize: "0.9rem", fontWeight: "400" }}>/month</span>
+                  </div>
+                  <p style={{ marginTop: "8px", fontSize: "0.85rem", fontWeight: "700", color: "#333" }}>(3 months)</p>
+                  <p style={{ marginTop: "10px", fontSize: "0.88rem", color: "#666" }}>Perfect for weekend acceleration</p>
+                </div>
               </div>
-              <div style={{ marginTop: "28px" }}>
+              <div style={{ background: "#ff6b2b", padding: "20px", flex: "1", display: "flex", flexDirection: "column" }}>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>All Online curriculum</span>
+                    <span style={{ color: "#000" }}>All Online curriculum</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Weekend workshops (mocks, hackathons)</span>
+                    <span style={{ color: "#000" }}>Weekend workshops (mocks, hackathons)</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Daily community access</span>
+                    <span style={{ color: "#000" }}>Daily community access</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Project feedback sessions</span>
+                    <span style={{ color: "#000" }}>Project feedback sessions</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Alumni network intro</span>
+                    <span style={{ color: "#000" }}>Alumni network intro</span>
                   </li>
-                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "0.85rem", color: "#999" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem", color: "#dc2626" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <line x1="18" y1="6" x2="6" y2="18"></line>
                       <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
-                    <span>No placement assistance</span>
+                    <span style={{ color: "#dc2626" }}>No placement assistance</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem", color: "#dc2626" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span style={{ color: "#dc2626" }}>No hostel accommodation</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "0.85rem", color: "#dc2626" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span style={{ color: "#dc2626" }}>No weekly mock interviews</span>
                   </li>
                 </ul>
               </div>
-              <button className="btn primary" style={{ width: "100%", marginTop: "28px", padding: "12px 20px", fontSize: "0.9rem" }} onClick={() => scrollTo("waitlist")}>
-                Start Learning
-              </button>
+              <div style={{ background: "#ff6b2b", padding: "0 20px 20px" }}>
+                <button className="btn primary" style={{ width: "100%", padding: "12px 20px", fontSize: "0.9rem", background: "#000", color: "#fff" }} onClick={() => scrollTo("waitlist")}>
+                  Start Learning
+                </button>
+              </div>
             </div>
 
-            {/* Full Cohort Plan */}
-            <div className="block card sa sa-d3" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "28px 20px" }}>
-              <div style={{ position: "absolute", top: "14px", left: "14px", background: "#e5e5e5", padding: "5px 14px", borderRadius: "20px", fontSize: "0.7rem", fontWeight: "700", letterSpacing: "0.05em" }}>
+            {/* Full Cohort Plan - Orange Premium */}
+            <div className="block card sa sa-d3" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "28px 20px", background: "#ff6b2b", display: "flex", flexDirection: "column" }}>
+              <div style={{ position: "absolute", top: "14px", left: "14px", background: "#000", color: "#ff6b2b", padding: "5px 14px", borderRadius: "20px", fontSize: "0.7rem", fontWeight: "700", letterSpacing: "0.05em" }}>
                 FULL COHORT
               </div>
               <div style={{ marginTop: "44px" }}>
-                <div style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.2rem)", fontWeight: "900", lineHeight: "1.2", marginBottom: "6px" }}>
+                <div style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.2rem)", fontWeight: "900", lineHeight: "1.2", marginBottom: "6px", color: "#000" }}>
                   ₹29,999<span style={{ fontSize: "0.9rem", fontWeight: "400" }}>/month</span>
                 </div>
-                <p style={{ marginTop: "8px", fontSize: "0.85rem", fontWeight: "700", color: "#333" }}>(4 months)</p>
-                <p style={{ marginTop: "10px", fontSize: "0.88rem", color: "#666" }}>For full-time transformation</p>
+                <p style={{ marginTop: "8px", fontSize: "0.85rem", fontWeight: "700", color: "#000" }}>(4 months)</p>
+                <p style={{ marginTop: "10px", fontSize: "0.88rem", color: "#000" }}>For full-time transformation</p>
               </div>
-              <div style={{ marginTop: "28px" }}>
+              <div style={{ marginTop: "28px", flex: "1" }}>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>NG Cult hostel accommodation (4 months)</span>
+                    <span style={{ color: "#000" }}>NG Cult hostel accommodation (4 months)</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Complete AI curriculum</span>
+                    <span style={{ color: "#000" }}>Complete AI curriculum</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Weekly mock interviews (TCS/Infosys format)</span>
+                    <span style={{ color: "#000", fontWeight: "700" }}>Weekly mock interviews (TCS/Infosys format)</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Weekly 1:1 consultation</span>
+                    <span style={{ color: "#000", fontWeight: "700" }}>Weekly 1:1 consultation</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Monthly progress reports</span>
+                    <span style={{ color: "#000", fontWeight: "700" }}>Monthly progress reports</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span>Daily study environment + micro-gym</span>
-                  </li>
-                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
-                    <span>Full alumni network</span>
+                    <span style={{ color: "#000", fontWeight: "700" }}>Full alumni network</span>
                   </li>
                   <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "0.85rem" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
-                    <span><strong>3 Mock Interviews POST-course guaranteed</strong></span>
+                    <span style={{ color: "#000", fontWeight: "700" }}>Placement assistance</span>
                   </li>
                 </ul>
               </div>
-              <button className="btn primary" style={{ width: "100%", marginTop: "28px", padding: "12px 20px", fontSize: "0.9rem" }} onClick={() => scrollTo("waitlist")}>
+              <button className="btn primary" style={{ width: "100%", marginTop: "auto", padding: "12px 20px", fontSize: "0.9rem", background: "#000", color: "#ff6b2b" }} onClick={() => scrollTo("waitlist")}>
                 Start Learning
               </button>
             </div>
