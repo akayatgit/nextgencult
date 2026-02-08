@@ -4,12 +4,13 @@ import { useEffect, useRef, useState, useCallback } from "react";
 
 const SECTIONS = [
   { id: "hero", num: "01", title: "Home" },
-  { id: "about", num: "02", title: "About" },
+  { id: "community", num: "02", title: "Who It's For" },
   { id: "lifestyle", num: "03", title: "Bootcamp" },
   { id: "career", num: "04", title: "RoadMap" },
-  { id: "community", num: "05", title: "Who It's For" },
-  { id: "location", num: "06", title: "Why Different" },
-  { id: "waitlist", num: "07", title: "Waitlist" },
+  { id: "pricing", num: "05", title: "Pricing" },
+  { id: "about", num: "06", title: "About" },
+  { id: "location", num: "07", title: "Why Different" },
+  { id: "waitlist", num: "08", title: "Waitlist" },
 ];
 
 const DARK_SECTIONS = new Set(["about", "community"]);
@@ -64,6 +65,7 @@ export default function Home() {
   const [formCitySuggestions, setFormCitySuggestions] = useState<string[]>([]);
   const [formCityOpen, setFormCityOpen] = useState(false);
   const [formLocation, setFormLocation] = useState("Any");
+  const [formPlan, setFormPlan] = useState("");
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
@@ -140,6 +142,8 @@ export default function Home() {
     const career = careerSelected === "Other" ? careerOther.trim() : careerSelected;
     if (!career) errors.career = "Select or enter a career interest";
 
+    if (!formPlan.trim()) errors.plan = "Select a plan";
+
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
 
@@ -155,6 +159,7 @@ export default function Home() {
           city: formCity.trim(),
           career,
           preferredLocation: formLocation,
+          plan: formPlan.trim(),
         }),
       });
       if (!res.ok) throw new Error("Submission failed");
@@ -488,17 +493,32 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ═══ ABOUT ═══ */}
-      <section className="screen section-black" id="about" ref={assignRef("about")}>
+      {/* ═══ WHO THIS IS FOR ═══ */}
+      <section className="screen section-black" id="community" ref={assignRef("community")}>
         <div className="screen-inner screen-content">
           <div className="block headline sa">
-            <h2>More Than a Hostel. <span style={{ color: "#ff6b2b" }}>A Community That Helps You Grow.</span></h2>
-            <p>
-              NG Cult is an AI-focused growth community where freshers, freelancers, and digital nomads live, learn, and build real automation skills together — so you don&apos;t figure AI alone.
-            </p>
-            <p>
-              Premium living meets hands-on AI learning, mindset support, and strong community energy designed to accelerate your next chapter.
-            </p>
+            <h2>Who This Is <span style={{ color: "#ff6b2b" }}>For</span></h2>
+          </div>
+          <div className="collage">
+            <div className="block tile sa sa-d1">
+              <h3>Freshers entering the AI era</h3>
+            </div>
+            <div className="block tile tilt sa sa-d2">
+              <h3>Freelancers automating workflows</h3>
+            </div>
+            <div className="block tile sa sa-d3">
+              <h3>Digital nomads building remote income</h3>
+            </div>
+            <div className="block tile wide sa sa-d4">
+              <h3>Creators exploring AI tools</h3>
+            </div>
+            <div className="block tile sa sa-d5">
+              <h3>Anyone serious about AI exposure</h3>
+            </div>
+          </div>
+          <div className="block headline sa sa-d6">
+            <p>If you want passive consumption, this isn&apos;t it.</p>
+            <p>If you want hands-on growth, welcome.</p>
           </div>
         </div>
       </section>
@@ -507,7 +527,7 @@ export default function Home() {
       <section className="screen section-white" id="lifestyle" ref={assignRef("lifestyle")}>
         <div className="screen-inner screen-content">
           <div className="block headline sa">
-            <h2>What This Bootcamp Is About</h2>
+            <h2>What This Bootcamp Is <span style={{ color: "#ff6b2b" }}>About</span></h2>
             <p>
               AI isn&apos;t just theory anymore.<br />
               It&apos;s automation, productivity, and opportunity.
@@ -541,7 +561,7 @@ export default function Home() {
       <section className="screen section-yellow" id="career" ref={assignRef("career")}>
         <div className="screen-inner screen-content screen-content-spread">
           <div className="block headline sa">
-            <h2>Core Learning Tracks</h2>
+            <h2>Core Learning <span style={{ color: "#ff6b2b" }}>Tracks</span></h2>
           </div>
           <div className="collage">
             <div className="block card sa sa-d1">
@@ -613,32 +633,215 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ WHO THIS IS FOR ═══ */}
-      <section className="screen section-black" id="community" ref={assignRef("community")}>
+      {/* ═══ PRICING ═══ */}
+      <section className="screen section-yellow" id="pricing" ref={assignRef("pricing")}>
+        <div className="screen-inner screen-content screen-content-spread" style={{ padding: "40px var(--nav-gutter) 48px 4vw" }}>
+          <div className="block headline sa" style={{ maxWidth: "100%", marginTop: "24px", marginBottom: "20px" }}>
+            <h2 style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", lineHeight: "1.2", wordBreak: "break-word" }}>NG Cult AI Cohort <span style={{ color: "#ff6b2b" }}>Pricing</span></h2>
+            <p style={{ marginTop: "8px", fontSize: "0.9rem" }}>Choose the right plan for your needs.</p>
+          </div>
+
+          {/* Pricing Table */}
+          <div style={{ display: "flex", gap: "20px", marginTop: "16px", flexWrap: "wrap", justifyContent: "center", marginBottom: "40px" }}>
+            {/* Online Plan */}
+            <div className="block card sa sa-d1" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "28px 20px" }}>
+              <div style={{ position: "absolute", top: "14px", left: "14px", background: "#e5e5e5", padding: "5px 14px", borderRadius: "20px", fontSize: "0.7rem", fontWeight: "700", letterSpacing: "0.05em" }}>
+                ONLINE
+              </div>
+              <div style={{ marginTop: "44px" }}>
+                <div style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.2rem)", fontWeight: "900", lineHeight: "1.2", marginBottom: "6px" }}>
+                  ₹9,999<span style={{ fontSize: "0.9rem", fontWeight: "400" }}>/month</span>
+                </div>
+                <p style={{ marginTop: "8px", fontSize: "0.85rem", fontWeight: "700", color: "#333" }}>(3 months)</p>
+                <p style={{ marginTop: "10px", fontSize: "0.88rem", color: "#666" }}>Perfect for learning from home</p>
+              </div>
+              <div style={{ marginTop: "28px" }}>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Live cohort classes (Tamil/English)</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Full AI automation curriculum</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Recordings + project resources</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>WhatsApp community access</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Portfolio templates</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "0.85rem", color: "#999" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span>No placement assistance</span>
+                  </li>
+                </ul>
+              </div>
+              <button className="btn primary" style={{ width: "100%", marginTop: "28px", padding: "12px 20px", fontSize: "0.9rem" }} onClick={() => scrollTo("waitlist")}>
+                Start Learning
+              </button>
+            </div>
+
+            {/* Hybrid Plan - Highlighted */}
+            <div className="block card sa sa-d2" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "28px 20px", border: "2px solid #ff6b2b", background: "linear-gradient(to bottom, rgba(255, 107, 43, 0.05), transparent)" }}>
+              <div style={{ position: "absolute", top: "14px", left: "14px", background: "linear-gradient(to right, #ff6b2b, #ff8c5a)", color: "#000", padding: "5px 14px", borderRadius: "20px", fontSize: "0.7rem", fontWeight: "700", letterSpacing: "0.05em" }}>
+                HYBRID
+              </div>
+              <div style={{ marginTop: "44px" }}>
+                <div style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.2rem)", fontWeight: "900", lineHeight: "1.2", marginBottom: "6px" }}>
+                  ₹16,666<span style={{ fontSize: "0.9rem", fontWeight: "400" }}>/month</span>
+                </div>
+                <p style={{ marginTop: "8px", fontSize: "0.85rem", fontWeight: "700", color: "#333" }}>(3 months)</p>
+                <p style={{ marginTop: "10px", fontSize: "0.88rem", color: "#666" }}>Perfect for weekend acceleration</p>
+              </div>
+              <div style={{ marginTop: "28px" }}>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>All Online curriculum</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Weekend workshops (mocks, hackathons)</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Daily community access</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Project feedback sessions</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Alumni network intro</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "0.85rem", color: "#999" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span>No placement assistance</span>
+                  </li>
+                </ul>
+              </div>
+              <button className="btn primary" style={{ width: "100%", marginTop: "28px", padding: "12px 20px", fontSize: "0.9rem" }} onClick={() => scrollTo("waitlist")}>
+                Start Learning
+              </button>
+            </div>
+
+            {/* Full Cohort Plan */}
+            <div className="block card sa sa-d3" style={{ flex: "1", minWidth: "280px", maxWidth: "320px", position: "relative", padding: "28px 20px" }}>
+              <div style={{ position: "absolute", top: "14px", left: "14px", background: "#e5e5e5", padding: "5px 14px", borderRadius: "20px", fontSize: "0.7rem", fontWeight: "700", letterSpacing: "0.05em" }}>
+                FULL COHORT
+              </div>
+              <div style={{ marginTop: "44px" }}>
+                <div style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.2rem)", fontWeight: "900", lineHeight: "1.2", marginBottom: "6px" }}>
+                  ₹29,999<span style={{ fontSize: "0.9rem", fontWeight: "400" }}>/month</span>
+                </div>
+                <p style={{ marginTop: "8px", fontSize: "0.85rem", fontWeight: "700", color: "#333" }}>(4 months)</p>
+                <p style={{ marginTop: "10px", fontSize: "0.88rem", color: "#666" }}>For full-time transformation</p>
+              </div>
+              <div style={{ marginTop: "28px" }}>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>NG Cult hostel accommodation (4 months)</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Complete AI curriculum</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Weekly mock interviews (TCS/Infosys format)</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Weekly 1:1 consultation</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Monthly progress reports</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Daily study environment + micro-gym</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "14px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span>Full alumni network</span>
+                  </li>
+                  <li style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "0.85rem" }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    <span><strong>3 Mock Interviews POST-course guaranteed</strong></span>
+                  </li>
+                </ul>
+              </div>
+              <button className="btn primary" style={{ width: "100%", marginTop: "28px", padding: "12px 20px", fontSize: "0.9rem" }} onClick={() => scrollTo("waitlist")}>
+                Start Learning
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ ABOUT ═══ */}
+      <section className="screen section-black" id="about" ref={assignRef("about")}>
         <div className="screen-inner screen-content">
           <div className="block headline sa">
-            <h2>Who This Is For</h2>
-          </div>
-          <div className="collage">
-            <div className="block tile sa sa-d1">
-              <h3>Freshers entering the AI era</h3>
-            </div>
-            <div className="block tile tilt sa sa-d2">
-              <h3>Freelancers automating workflows</h3>
-            </div>
-            <div className="block tile sa sa-d3">
-              <h3>Digital nomads building remote income</h3>
-            </div>
-            <div className="block tile wide sa sa-d4">
-              <h3>Creators exploring AI tools</h3>
-            </div>
-            <div className="block tile sa sa-d5">
-              <h3>Anyone serious about AI exposure</h3>
-            </div>
-          </div>
-          <div className="block headline sa sa-d6">
-            <p>If you want passive consumption, this isn&apos;t it.</p>
-            <p>If you want hands-on growth, welcome.</p>
+            <h2>More Than a Hostel. <span style={{ color: "#ff6b2b" }}>A Community That Helps You Grow.</span></h2>
+            <p>
+              NG Cult is an AI-focused growth community where freshers, freelancers, and digital nomads live, learn, and build real automation skills together — so you don&apos;t figure AI alone.
+            </p>
+            <p>
+              Premium living meets hands-on AI learning, mindset support, and strong community energy designed to accelerate your next chapter.
+            </p>
           </div>
         </div>
       </section>
@@ -647,7 +850,7 @@ export default function Home() {
       <section className="screen section-white" id="location" ref={assignRef("location")}>
         <div className="screen-inner screen-content screen-content-spread">
           <div className="block headline sa">
-            <h2>Why NG Cult Is Different</h2>
+            <h2>Why NG Cult Is <span style={{ color: "#ff6b2b" }}>Different</span></h2>
           </div>
           <div className="collage">
             <div className="block card sa sa-d1">
@@ -682,7 +885,7 @@ export default function Home() {
             <p>This is about transformation, not just courses.</p>
           </div>
           <div className="block headline sa sa-d12">
-            <h2>Core Belief</h2>
+            <h2>Core <span style={{ color: "#ff6b2b" }}>Belief</span></h2>
             <p>AI growth shouldn&apos;t be lonely.</p>
             <p>When you live with ambitious learners:</p>
             <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
@@ -700,7 +903,7 @@ export default function Home() {
         <div className="screen-inner screen-content screen-content-center">
           <div className="waitlist-box">
             <div className="waitlist-copy sa">
-              <h2>Early Members Get First Access + Special Perks</h2>
+              <h2>Early Members Get First Access + <span style={{ color: "#ff6b2b" }}>Special Perks</span></h2>
               <p>
                 Join the founding community and unlock priority onboarding,
                 limited pricing, and exclusive events.
@@ -861,6 +1064,20 @@ export default function Home() {
                     <option value="Whitefield">Whitefield</option>
                     <option value="Yelahanka">Yelahanka</option>
                   </select>
+                </label>
+                <label>
+                  Select Plan
+                  <select
+                    value={formPlan}
+                    onChange={(e) => setFormPlan(e.target.value)}
+                    className={formErrors.plan ? "input-error" : ""}
+                  >
+                    <option value="">Select a plan</option>
+                    <option value="Online">Online</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Full Cohort (With Placement Assistance)">Full Cohort (With Placement Assistance)</option>
+                  </select>
+                  {formErrors.plan && <span className="field-error">{formErrors.plan}</span>}
                 </label>
                 <button className="btn primary" type="submit" disabled={formSubmitting}>
                   {formSubmitting ? "Submitting…" : "Register"}

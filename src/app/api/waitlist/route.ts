@@ -16,9 +16,9 @@ function readableTimestamp() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, whatsapp, email, city, career, preferredLocation } = body;
+    const { name, whatsapp, email, city, career, preferredLocation, plan } = body;
 
-    if (!name || !whatsapp || !email || !career) {
+    if (!name || !whatsapp || !email || !career || !plan) {
       return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
 
@@ -42,6 +42,7 @@ export async function POST(req: Request) {
         city: city || "",
         career,
         preferredLocation: preferredLocation || "Any",
+        plan: plan || "",
       }),
     });
 
