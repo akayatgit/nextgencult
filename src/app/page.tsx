@@ -323,8 +323,9 @@ export default function Home() {
               </div>
               <h1 className="sa sa-hero">NG <span style={{ color: "#ff6b2b" }}>Cult.</span></h1>
               <p className="lead sa sa-d2">
-                The AI revolution needs you. We'll get you ready.<br />
-                AI for everyone.
+                The AI revolution needs you.<br />
+                We'll get you ready.<br />
+                <strong style={{ color: "#ff6b2b" }}>AI for everyone.</strong>
               </p>
               <div className="hero-cta-row sa sa-d3">
                 <a className="btn primary" href="#waitlist" onClick={(e) => { e.preventDefault(); scrollTo("waitlist"); }}>
