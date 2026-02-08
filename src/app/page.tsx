@@ -5,10 +5,10 @@ import { useEffect, useRef, useState, useCallback } from "react";
 const SECTIONS = [
   { id: "hero", num: "01", title: "Home" },
   { id: "about", num: "02", title: "About" },
-  { id: "lifestyle", num: "03", title: "Lifestyle" },
-  { id: "career", num: "04", title: "Career" },
-  { id: "community", num: "05", title: "Community" },
-  { id: "location", num: "06", title: "Location" },
+  { id: "lifestyle", num: "03", title: "Bootcamp" },
+  { id: "career", num: "04", title: "Learning Tracks" },
+  { id: "community", num: "05", title: "Who It's For" },
+  { id: "location", num: "06", title: "Why Different" },
   { id: "waitlist", num: "07", title: "Waitlist" },
 ];
 
@@ -16,44 +16,32 @@ const DARK_SECTIONS = new Set(["about", "community"]);
 
 const COURSES = [
   {
-    name: "Artificial Intelligence (AI) & Machine Learning (ML)",
-    hint: "Neural networks, NLP, and automation — the backbone of modern tech.",
+    name: "AI & Machine Learning Foundations",
+    hint: "Understand how AI works before building with it — core ML concepts, model basics, and real-world use cases.",
   },
   {
-    name: "Data Science & Analytics",
-    hint: "Interpret big data to drive business decisions and strategy.",
+    name: "AI Workflow Automation",
+    hint: "Turn repetitive work into automated systems using n8n, Make.com, and Zapier.",
   },
   {
-    name: "Cybersecurity & Ethical Hacking",
-    hint: "Protect digital infrastructure from rising cyber threats.",
+    name: "Agentic AI Systems",
+    hint: "Build AI that acts, not just responds — LangChain, autonomous workflows, and multi-agent orchestration.",
   },
   {
-    name: "Full Stack Web Development",
-    hint: "Front-end + back-end mastery (MERN, Next.js, etc.).",
+    name: "RAG Systems & Knowledge AI",
+    hint: "Make AI work with your data — embeddings, vector databases, and retrieval-augmented generation.",
   },
   {
-    name: "Cloud Computing & DevOps",
-    hint: "Cloud infrastructure, CI/CD pipelines, and automation tools.",
+    name: "Generative AI & Prompt Engineering",
+    hint: "Create content, systems, and automation — prompt design, ComfyUI workflows, and GenAI productivity.",
   },
   {
-    name: "Digital Marketing & Growth Hacking",
-    hint: "SEO, content marketing, social media ads, and growth loops.",
-  },
-  {
-    name: "Prompt Engineering & Generative AI",
-    hint: "High-growth skills for working with AI models and LLMs.",
-  },
-  {
-    name: "UI/UX Design",
-    hint: "User-centric interface and experience design principles.",
-  },
-  {
-    name: "Software Development (Java/Python)",
-    hint: "Core programming languages for building scalable applications.",
+    name: "Machine Learning Frameworks",
+    hint: "Hands-on exposure to TensorFlow, PyTorch, and Scikit-learn — focus on application, not theory.",
   },
   {
     name: "Other",
-    hint: "Don't see your field? Tell us what you're into.",
+    hint: "Don't see your track? Tell us what you're interested in.",
   },
 ];
 
@@ -330,8 +318,8 @@ export default function Home() {
               </div>
               <h1 className="sa sa-hero">NG <span style={{ color: "#ff6b2b" }}>Cult.</span></h1>
               <p className="lead sa sa-d2">
-                Not Just a Hostel.<br />
-                Grow Together, Not Alone.
+                Not just a hostel.<br />
+                Not just a course.
               </p>
               <div className="hero-cta-row sa sa-d3">
                 <a className="btn primary" href="#waitlist" onClick={(e) => { e.preventDefault(); scrollTo("waitlist"); }}>
@@ -506,119 +494,203 @@ export default function Home() {
           <div className="block headline sa">
             <h2>More Than a Hostel. <span style={{ color: "#ff6b2b" }}>A Community That Helps You Grow.</span></h2>
             <p>
-              NG Cult is a hostel built for people who want more from where they stay.<br />
-              <br />
-              <strong>More exposure.</strong><br />
-              <strong>More mindset shifts.</strong><br />
-              <strong>More growth.</strong><br />
-              <br />
+              NG Cult is an AI-focused growth community where freshers, freelancers, and digital nomads live, learn, and build real automation skills together — so you don&apos;t figure AI alone.
             </p>
             <p>
-              We bring together ambitious students, learners, creators, freelancers, and nomads under one roof — so you don&apos;t have to figure your journey alone.<br />
-              <br />
-            </p>
-            <p>
-              Comfortable living meets skill exposure, strong community energy, and real conversations about growth, income, mindset, and future opportunities.
+              Premium living meets hands-on AI learning, mindset support, and strong community energy designed to accelerate your next chapter.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ═══ LIFESTYLE ═══ */}
+      {/* ═══ WHAT THIS BOOTCAMP IS ABOUT ═══ */}
       <section className="screen section-white" id="lifestyle" ref={assignRef("lifestyle")}>
         <div className="screen-inner screen-content">
           <div className="block headline sa">
-            <h2>Lifestyle Experience</h2>
-            <p>Growth happens faster together.</p>
+            <h2>What This Bootcamp Is About</h2>
+            <p>
+              AI isn&apos;t just theory anymore.<br />
+              It&apos;s automation, productivity, and opportunity.
+            </p>
+            <p>This bootcamp focuses on:</p>
           </div>
           <div className="collage">
             <div className="block tile wide sa sa-d1">
-              <h3>Stylish Accommodation</h3>
-              <p>Clean GenZ aesthetic rooms with cozy lighting.</p>
+              <h3>Practical AI skills</h3>
             </div>
             <div className="block tile tilt sa sa-d2">
-              <h3>Study + Chill Balance</h3>
-              <p>Focused work pods with relaxing social corners.</p>
+              <h3>Real workflow automation</h3>
             </div>
             <div className="block tile sa sa-d3">
-              <h3>Healthy GenZ Food</h3>
-              <p>Nutrition first meals plus a fun snack culture.</p>
+              <h3>Collaborative learning</h3>
             </div>
             <div className="block tile wide sa sa-d4">
-              <h3>Community Life</h3>
-              <p>Standups, game nights, movie nights, deep talks.</p>
+              <h3>Exposure to emerging AI tools</h3>
             </div>
+            <div className="block tile sa sa-d5">
+              <h3>Community accountability</h3>
+            </div>
+          </div>
+          <div className="block headline sa sa-d6">
+            <p>You learn faster because you live in it.</p>
           </div>
         </div>
       </section>
 
-      {/* ═══ CAREER ═══ */}
+      {/* ═══ CORE LEARNING TRACKS ═══ */}
       <section className="screen section-yellow" id="career" ref={assignRef("career")}>
         <div className="screen-inner screen-content screen-content-spread">
           <div className="block headline sa">
-            <h2>Your Shortcut Into Tech Industry</h2>
+            <h2>Core Learning Tracks</h2>
           </div>
-          <div className="collage collage-spread">
-            <div className="block chip sa sa-d1">Structured Roadmaps</div>
-            <div className="block chip wide sa sa-d2">Peer Learning Ecosystem</div>
-            <div className="block chip tilt sa sa-d3">Expert Interaction</div>
-            <div className="block chip sa sa-d4">Fresher Job Insights</div>
-            <div className="block chip wide sa sa-d5">Portfolio Building Support</div>
-          </div>
-          <div className="sa sa-d6">
-            <button className="btn primary" onClick={() => scrollTo("waitlist")}>
-              Secure Your Spot
-            </button>
+          <div className="collage">
+            <div className="block card sa sa-d1">
+              <h3>AI & Machine Learning Foundations</h3>
+              <p>Understand how AI works before building with it.</p>
+              <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
+                <li>Core ML concepts simplified</li>
+                <li>Model basics & workflows</li>
+                <li>Real-world AI use cases</li>
+                <li>Hands-on exploration mindset</li>
+              </ul>
+            </div>
+            <div className="block card tilt sa sa-d2">
+              <h3>AI Workflow Automation</h3>
+              <p>Turn repetitive work into automated systems.</p>
+              <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
+                <li>n8n automation workflows</li>
+                <li>Make.com integrations</li>
+                <li>Zapier automation pipelines</li>
+                <li>Practical business automations</li>
+              </ul>
+              <p style={{ marginTop: "12px", fontStyle: "italic" }}>This is where AI meets real productivity.</p>
+            </div>
+            <div className="block card wide sa sa-d3">
+              <h3>Agentic AI Systems</h3>
+              <p>Build AI that acts, not just responds.</p>
+              <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
+                <li>LangChain ecosystem</li>
+                <li>Autonomous AI workflows</li>
+                <li>Multi-agent orchestration</li>
+                <li>Real-world automation scenarios</li>
+              </ul>
+              <p style={{ marginTop: "12px", fontStyle: "italic" }}>Future-ready skills.</p>
+            </div>
+            <div className="block card sa sa-d4">
+              <h3>RAG Systems & Knowledge AI</h3>
+              <p>Make AI work with your data.</p>
+              <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
+                <li>Embeddings fundamentals</li>
+                <li>Vector databases</li>
+                <li>Retrieval-Augmented Generation</li>
+                <li>Practical knowledge assistants</li>
+              </ul>
+              <p style={{ marginTop: "12px", fontStyle: "italic" }}>Critical for modern AI applications.</p>
+            </div>
+            <div className="block card sa sa-d5">
+              <h3>Generative AI & Prompt Engineering</h3>
+              <p>Create content, systems, and automation.</p>
+              <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
+                <li>Prompt design strategies</li>
+                <li>ComfyUI workflows</li>
+                <li>Image/video AI pipelines</li>
+                <li>GenAI productivity use cases</li>
+              </ul>
+              <p style={{ marginTop: "12px", fontStyle: "italic" }}>Build faster with AI assistance.</p>
+            </div>
+            <div className="block card tilt wide sa sa-d6">
+              <h3>Machine Learning Frameworks</h3>
+              <p>Hands-on exposure to industry tools.</p>
+              <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
+                <li>TensorFlow fundamentals</li>
+                <li>PyTorch basics</li>
+                <li>Scikit-learn workflows</li>
+                <li>Practical ML implementation mindset</li>
+              </ul>
+              <p style={{ marginTop: "12px", fontStyle: "italic" }}>Focus on application, not academic overload.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ COMMUNITY ═══ */}
+      {/* ═══ WHO THIS IS FOR ═══ */}
       <section className="screen section-black" id="community" ref={assignRef("community")}>
         <div className="screen-inner screen-content">
           <div className="block headline sa">
-            <h2>Community Proof / Social Energy</h2>
-            <p>This is not renting. This is belonging.</p>
+            <h2>Who This Is For</h2>
           </div>
           <div className="collage">
-            <div className="block media-card sa sa-d1">
-              <h3>Member Testimonials</h3>
-              <p>&ldquo;I grew 3x faster with accountability squads.&rdquo;</p>
+            <div className="block tile sa sa-d1">
+              <h3>Freshers entering the AI era</h3>
             </div>
-            <div className="block media-card tilt sa sa-d2">
-              <h3>Podcast Clips</h3>
-              <p>Founder chats, career myths, and tech trends.</p>
+            <div className="block tile tilt sa sa-d2">
+              <h3>Freelancers automating workflows</h3>
             </div>
-            <div className="block media-card sa sa-d3">
-              <h3>Hackathon Snapshots</h3>
-              <p>Weekend builds, demos, and community energy.</p>
+            <div className="block tile sa sa-d3">
+              <h3>Digital nomads building remote income</h3>
             </div>
-            <div className="block media-card wide sa sa-d4">
-              <h3>Room Vibes</h3>
-              <p>Premium beds, ambient light, and calm focus.</p>
+            <div className="block tile wide sa sa-d4">
+              <h3>Creators exploring AI tools</h3>
             </div>
+            <div className="block tile sa sa-d5">
+              <h3>Anyone serious about AI exposure</h3>
+            </div>
+          </div>
+          <div className="block headline sa sa-d6">
+            <p>If you want passive consumption, this isn&apos;t it.</p>
+            <p>If you want hands-on growth, welcome.</p>
           </div>
         </div>
       </section>
 
-      {/* ═══ LOCATION ═══ */}
+      {/* ═══ WHY NG CULT IS DIFFERENT ═══ */}
       <section className="screen section-white" id="location" ref={assignRef("location")}>
         <div className="screen-inner screen-content screen-content-spread">
           <div className="block headline sa">
-            <h2>Location Advantage</h2>
-            <p>
-              Based in Bangalore&apos;s tech hub with effortless access to
-              institutes, startups, and networking zones.
-            </p>
+            <h2>Why NG Cult Is Different</h2>
+          </div>
+          <div className="collage">
+            <div className="block card sa sa-d1">
+              <h3>Learn + Live Ecosystem</h3>
+              <p>You don&apos;t attend classes. You live inside the learning environment.</p>
+            </div>
+            <div className="block card tilt sa sa-d2">
+              <h3>Community Accountability</h3>
+              <p>Peers accelerate your consistency.</p>
+            </div>
+            <div className="block card wide sa sa-d3">
+              <h3>Exposure Over Isolation</h3>
+              <p>Daily conversations about AI, tools, ideas, opportunities.</p>
+            </div>
+            <div className="block card sa sa-d4">
+              <h3>Mindset + Skill Together</h3>
+              <p>Technical growth + personal growth.</p>
+            </div>
+          </div>
+          <div className="block headline sa sa-d5">
+            <h3>Beyond Learning</h3>
+            <p>You also get:</p>
           </div>
           <div className="collage collage-spread">
-            <div className="block chip sa sa-d1">Tech Hub Access</div>
-            <div className="block chip wide sa sa-d2">Transport to Institutes</div>
-            <div className="block chip tilt sa sa-d3">Startup Exposure</div>
-            <div className="block chip sa sa-d4">Networking Proximity</div>
+            <div className="block chip sa sa-d6">Premium hostel accommodation</div>
+            <div className="block chip wide sa sa-d7">Strong peer community</div>
+            <div className="block chip tilt sa sa-d8">Networking exposure</div>
+            <div className="block chip sa sa-d9">Content & personal brand support</div>
+            <div className="block chip wide sa sa-d10">Industry conversations</div>
           </div>
-          <div className="block map-card sa sa-d5">
-            <div className="map-label">Bangalore Tech Hub</div>
+          <div className="block headline sa sa-d11">
+            <p>This is about transformation, not just courses.</p>
+          </div>
+          <div className="block headline sa sa-d12">
+            <h2>Core Belief</h2>
+            <p>AI growth shouldn&apos;t be lonely.</p>
+            <p>When you live with ambitious learners:</p>
+            <ul style={{ marginTop: "12px", paddingLeft: "20px" }}>
+              <li>Momentum becomes normal</li>
+              <li>Opportunities appear naturally</li>
+              <li>Confidence builds faster</li>
+            </ul>
+            <p style={{ marginTop: "24px", fontWeight: "bold" }}>That&apos;s NG Cult.</p>
           </div>
         </div>
       </section>
