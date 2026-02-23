@@ -281,12 +281,9 @@ export default function CustomRoadmapPage() {
                 width: "100%",
               }}
             >
-              <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "16px", color: "var(--ink)" }}>
-                Get Started 🚀
+              <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "24px", color: "var(--ink)" }}>
+                Get Started🚀, Its 100% Free.
               </h2>
-              <p style={{ fontSize: "0.95rem", color: "var(--muted)", marginBottom: "24px" }}>
-                Sign up to track your progress and save it across devices
-              </p>
               <form onSubmit={handleSignup}>
                 <div style={{ marginBottom: "16px" }}>
                   <label style={{ display: "block", marginBottom: "8px", fontWeight: 600, fontSize: "0.9rem" }}>
@@ -346,7 +343,7 @@ export default function CustomRoadmapPage() {
                     cursor: signupLoading ? "not-allowed" : "pointer",
                   }}
                 >
-                  {signupLoading ? "Signing up..." : "Start Learning 🎯"}
+                  {signupLoading ? "Signing up..." : "Start Learning Free 🎯"}
                 </button>
               </form>
             </div>
