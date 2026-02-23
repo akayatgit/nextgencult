@@ -13,9 +13,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NextGen Cult | Tech Community Hostel",
+  title: "NG Cult | IT Career Counselling & Personalized Tech Roadmaps",
   description:
-    "NextGen Cult (NG Cult) is a premium GenZ tech community and stay ecosystem for mentorship, events, and career acceleration.",
+    "Get IT career counselling with a personalized roadmap based on your skills, time, strengths, and market demand. Avoid wrong course choices. Book ₹99 consult.",
+  keywords: [
+    "IT career counselling",
+    "tech career guidance",
+    "personalized career roadmap",
+    "career assessment for students",
+    "course selection guidance",
+    "IT career roadmap India",
+    "career consultation for students",
+    "guidance before choosing a course",
+    "career confusion help",
+  ],
+  openGraph: {
+    title: "NG Cult | IT Career Counselling & Personalized Tech Roadmaps",
+    description:
+      "Get IT career counselling with a personalized roadmap based on your skills, time, strengths, and market demand. Avoid wrong course choices. Book ₹99 consult.",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NG Cult | IT Career Counselling & Personalized Tech Roadmaps",
+    description:
+      "Get IT career counselling with a personalized roadmap based on your skills, time, strengths, and market demand. Avoid wrong course choices. Book ₹99 consult.",
+  },
 };
 
 export default function RootLayout({
