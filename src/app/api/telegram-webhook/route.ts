@@ -8,6 +8,16 @@ import {
   TelegramUpdate,
 } from "@/lib/telegram";
 
+// GET handler for health checks
+export async function GET(request: Request) {
+  return NextResponse.json({
+    ok: true,
+    message: "Telegram webhook endpoint is active",
+    timestamp: new Date().toISOString(),
+    webhook_url: "https://nextgencult.com/api/telegram-webhook",
+  });
+}
+
 export async function POST(request: Request) {
   try {
     // Check if bot token is set
