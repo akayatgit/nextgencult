@@ -50,6 +50,7 @@ export async function GET(request: Request) {
               callback_data: `welcome_followup:hard`,
             },
           ],
+          [
             {
               text: "⏰ No time, remind me tomorrow",
               callback_data: `welcome_followup:tomorrow`,
