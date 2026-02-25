@@ -108,11 +108,27 @@ export async function POST(request: Request) {
         }
 
         // Send immediate Day 1 message FIRST
-        console.log(`Sending Day 1 to chat ${chatId} for roadmap ${roadmapId}`);
-        const day1Sent = await sendDayMessage(chatId, roadmapId, roadmapType, 1);
+        console.log(`[ROADMAP SELECTION] Chat: ${chatId}, Roadmap: ${roadmapId}, Type: ${roadmapType}`);
         
-        if (!day1Sent) {
-          console.error(`Failed to send Day 1 to chat ${chatId}`);
+        try {
+          const day1Sent = await sendDayMessage(chatId, roadmapId, roadmapType, 1);
+          
+          if (!day1Sent) {
+            console.error(`[ERROR] Failed to send Day 1 to chat ${chatId} for roadmap ${roadmapId}`);
+            // Send error message to user
+            await sendTelegramMessage(
+              chatId,
+              `⚠️ There was an issue loading Day 1. Please try selecting the roadmap again or contact support.`
+            );
+          } else {
+            console.log(`[SUCCESS] Day 1 sent to chat ${chatId}`);
+          }
+        } catch (error) {
+          console.error(`[EXCEPTION] Error sending Day 1:`, error);
+          await sendTelegramMessage(
+            chatId,
+            `⚠️ Error loading Day 1. Please try again later.`
+          );
         }
 
         // Then send welcome message
@@ -383,7 +399,7 @@ async function sendDayMessage(
     let dayData: any = null;
 
     if (roadmapType === "custom") {
-      console.log(`Fetching custom roadmap template: ${roadmapId}`);
+      console.log(`[FETCH] Custom roadmap template: ${roadmapId}`);
       const { data: template, error: templateError } = await supabase
         .from("custom_roadmap_templates")
         .select("data")
@@ -391,23 +407,44 @@ async function sendDayMessage(
         .single();
 
       if (templateError) {
-        console.error("Error fetching template:", templateError);
+        console.error(`[ERROR] Template fetch failed:`, templateError);
+        console.error(`[ERROR] Roadmap ID: ${roadmapId}, Error: ${JSON.stringify(templateError)}`);
         return false;
       }
 
-      console.log("Template fetched:", template ? "found" : "not found");
-
-      if (template && (template as any).data?.days) {
-        const days = (template as any).data.days;
-        console.log(`Found ${days.length} days in template`);
-        dayData = days.find((d: any) => d.day === dayNumber);
-        console.log(`Day ${dayNumber} data:`, dayData ? "found" : "not found");
-      } else {
-        console.error("Template data structure invalid:", template);
+      if (!template) {
+        console.error(`[ERROR] Template not found for ID: ${roadmapId}`);
+        return false;
       }
+
+      console.log(`[SUCCESS] Template found for ${roadmapId}`);
+
+      const templateData = (template as any).data;
+      if (!templateData) {
+        console.error(`[ERROR] Template data is null/undefined for ${roadmapId}`);
+        return false;
+      }
+
+      if (!templateData.days || !Array.isArray(templateData.days)) {
+        console.error(`[ERROR] Template days array missing or invalid for ${roadmapId}`);
+        console.error(`[DEBUG] Template data structure:`, JSON.stringify(templateData, null, 2));
+        return false;
+      }
+
+      const days = templateData.days;
+      console.log(`[INFO] Found ${days.length} days in template`);
+      
+      dayData = days.find((d: any) => d.day === dayNumber);
+      
+      if (!dayData) {
+        console.error(`[ERROR] Day ${dayNumber} not found in template. Available days:`, days.map((d: any) => d.day));
+        return false;
+      }
+      
+      console.log(`[SUCCESS] Day ${dayNumber} data found`);
     } else {
       // For now, only custom roadmaps are supported for day messages
-      console.log("Standard roadmaps not supported yet");
+      console.log(`[WARN] Standard roadmaps not supported yet. Type: ${roadmapType}`);
       return false;
     }
 
