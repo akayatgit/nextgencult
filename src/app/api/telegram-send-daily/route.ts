@@ -61,6 +61,11 @@ async function sendDailyReminder(user: any) {
   );
   const currentDay = daysSinceStart + 1;
 
+  // Skip Day 1 here because it's sent immediately on enrollment
+  if (daysSinceStart <= 0) {
+    return;
+  }
+
   // Update user's current day
   await supabase
     .from("telegram_bot_users")

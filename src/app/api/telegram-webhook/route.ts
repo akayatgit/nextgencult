@@ -72,6 +72,9 @@ export async function POST(request: Request) {
           .eq("chat_id", chatId)
           .single();
 
+        const now = new Date();
+        const todayStr = now.toISOString().split("T")[0];
+
         if (existingUser) {
           // Update existing user
           await supabase
@@ -79,9 +82,11 @@ export async function POST(request: Request) {
             .update({
               roadmap_id: roadmapId,
               roadmap_type: roadmapType,
-              start_date: new Date().toISOString().split("T")[0],
+              start_date: todayStr,
               current_day: 1,
               is_active: true,
+              enrolled_at: now.toISOString(),
+              welcome_followup_sent: false,
             })
             .eq("chat_id", chatId);
         } else {
@@ -93,16 +98,21 @@ export async function POST(request: Request) {
               first_name: callback_query.from.first_name,
               roadmap_id: roadmapId,
               roadmap_type: roadmapType,
-              start_date: new Date().toISOString().split("T")[0],
+              start_date: todayStr,
               current_day: 1,
               is_active: true,
+              enrolled_at: now.toISOString(),
+              welcome_followup_sent: false,
             },
           ]);
         }
 
+        // Send immediate Day 1 message
+        await sendDayMessage(chatId, roadmapId, roadmapType, 1);
+
         await sendTelegramMessage(
           chatId,
-          `✅ Great! You've selected a roadmap. I'll send you daily reminders starting tomorrow.\n\nUse /start to see your current roadmap or /list to see all available roadmaps.`
+          `✅ You're in! This is Day 1 of your roadmap. I'll continue from Day 2 every morning at 8 AM.\n\nUse /status to check your progress or /list to switch roadmaps.`
         );
         return NextResponse.json({ ok: true });
       }
@@ -211,6 +221,29 @@ export async function POST(request: Request) {
         return NextResponse.json({ ok: true });
       }
 
+      if (data.startsWith("welcome_followup:")) {
+        const [, reason] = data.split(":");
+
+        if (reason === "started") {
+          await sendTelegramMessage(
+            chatId,
+            "🔥 Love that you started! Just keep showing up every day. Even 30 minutes counts."
+          );
+        } else if (reason === "hard") {
+          await sendTelegramMessage(
+            chatId,
+            "😓 It's okay if it feels hard. Try breaking today's task into smaller chunks, or just watch 1 video to begin."
+          );
+        } else if (reason === "tomorrow") {
+          await sendTelegramMessage(
+            chatId,
+            "⏰ Got it. I'll remind you again in tomorrow's message. No rush—consistency matters more than speed."
+          );
+        }
+
+        return NextResponse.json({ ok: true });
+      }
+
       return NextResponse.json({ ok: true });
     }
 
@@ -237,15 +270,20 @@ export async function POST(request: Request) {
             .eq("chat_id", chatId)
             .single();
 
+          const now = new Date();
+          const todayStr = now.toISOString().split("T")[0];
+
           if (existingUser) {
             await supabase
               .from("telegram_bot_users")
               .update({
                 roadmap_id: roadmapId,
                 roadmap_type: "custom",
-                start_date: new Date().toISOString().split("T")[0],
+                start_date: todayStr,
                 current_day: 1,
                 is_active: true,
+                enrolled_at: now.toISOString(),
+                welcome_followup_sent: false,
               })
               .eq("chat_id", chatId);
           } else {
@@ -257,16 +295,21 @@ export async function POST(request: Request) {
                 last_name: message.from.last_name,
                 roadmap_id: roadmapId,
                 roadmap_type: "custom",
-                start_date: new Date().toISOString().split("T")[0],
+                start_date: todayStr,
                 current_day: 1,
                 is_active: true,
+                enrolled_at: now.toISOString(),
+                welcome_followup_sent: false,
               },
             ]);
           }
 
+          // Send immediate Day 1 message
+          await sendDayMessage(chatId, roadmapId, "custom", 1);
+
           await sendTelegramMessage(
             chatId,
-            `✅ Welcome! You've been enrolled in the roadmap. I'll send you daily reminders starting tomorrow.\n\nUse /list to see all available roadmaps.`
+            `✅ Welcome! This is Day 1 of your roadmap. I'll continue from Day 2 every morning at 8 AM.\n\nUse /list to see all available roadmaps.`
           );
         } else {
           // Show roadmap list
@@ -320,6 +363,96 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Error handling Telegram webhook:", error);
     return NextResponse.json({ ok: false, error: String(error) }, { status: 500 });
+  }
+}
+
+async function sendDayMessage(
+  chatId: number,
+  roadmapId: string,
+  roadmapType: string,
+  dayNumber: number
+) {
+  try {
+    let dayData: any = null;
+
+    if (roadmapType === "custom") {
+      const { data: template } = await supabase
+        .from("custom_roadmap_templates")
+        .select("data")
+        .eq("id", roadmapId)
+        .single();
+
+      if (template && (template as any).data?.days) {
+        dayData = (template as any).data.days.find(
+          (d: any) => d.day === dayNumber
+        );
+      }
+    } else {
+      // For now, only custom roadmaps are supported for day messages
+      return;
+    }
+
+    if (!dayData) {
+      await sendTelegramMessage(
+        chatId,
+        `Unable to find Day ${dayNumber} for this roadmap. Please try again later.`
+      );
+      return;
+    }
+
+    let message = `📅 <b>Day ${dayNumber}</b>\n\n`;
+
+    if (dayData.newTopic) {
+      message += `✅ <b>Task:</b> ${dayData.newTopic}\n`;
+    }
+
+    if (dayData.tasks && dayData.tasks[0] && dayData.tasks[0].description) {
+      const description = dayData.tasks[0].description
+        .replace(/<[^>]*>/g, "")
+        .replace(/&nbsp;/g, " ")
+        .trim();
+      if (description) {
+        message += `\n📝 <b>Description:</b>\n${description}\n`;
+      }
+    }
+
+    if (dayData.review1 || dayData.review2) {
+      message += `\n📋 <b>Subtasks:</b>\n`;
+      if (dayData.review1) {
+        message += `  • ${dayData.review1}\n`;
+      }
+      if (dayData.review2) {
+        message += `  • ${dayData.review2}\n`;
+      }
+    }
+
+    if (dayData.youtubeVideos && dayData.youtubeVideos.length > 0) {
+      message += `\n🎥 <b>Videos:</b>\n`;
+      dayData.youtubeVideos.forEach((video: any) => {
+        if (video.url) {
+          message += `  • <a href="${video.url}">${
+            video.title || "Watch Video"
+          }</a>\n`;
+        }
+      });
+    }
+
+    if (dayData.links && dayData.links.length > 0) {
+      message += `\n🔗 <b>Links:</b>\n`;
+      dayData.links.forEach((link: any) => {
+        if (link.url) {
+          message += `  • <a href="${link.url}">${
+            link.title || "Open Link"
+          }</a>\n`;
+        }
+      });
+    }
+
+    message += `\n💪 Good luck with today's tasks!`;
+
+    await sendTelegramMessage(chatId, message);
+  } catch (error) {
+    console.error("Error sending day message:", error);
   }
 }
 

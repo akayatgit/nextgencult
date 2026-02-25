@@ -42,3 +42,8 @@ CREATE TRIGGER update_telegram_bot_users_updated_at BEFORE UPDATE ON telegram_bo
 -- Create trigger to auto-update updated_at for telegram_bot_progress
 CREATE TRIGGER update_telegram_bot_progress_updated_at BEFORE UPDATE ON telegram_bot_progress
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Additional columns for welcome follow-ups
+ALTER TABLE telegram_bot_users
+  ADD COLUMN IF NOT EXISTS enrolled_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  ADD COLUMN IF NOT EXISTS welcome_followup_sent BOOLEAN DEFAULT FALSE;
