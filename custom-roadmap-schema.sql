@@ -38,3 +38,15 @@ CREATE TRIGGER update_custom_roadmap_users_updated_at BEFORE UPDATE ON custom_ro
 -- Create trigger to auto-update updated_at for custom_roadmap_progress
 CREATE TRIGGER update_custom_roadmap_progress_updated_at BEFORE UPDATE ON custom_roadmap_progress
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Templates for custom roadmaps (builder output)
+CREATE TABLE IF NOT EXISTS custom_roadmap_templates (
+  id VARCHAR(100) PRIMARY KEY, -- shareable roadmap_id
+  title VARCHAR(200) NOT NULL,
+  ui_mode_default VARCHAR(10) DEFAULT 'dark',
+  data JSONB NOT NULL, -- stores days, metadata, etc.
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_custom_roadmap_templates_created_at
+  ON custom_roadmap_templates(created_at);
