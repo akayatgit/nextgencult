@@ -107,9 +107,15 @@ export async function POST(request: Request) {
           ]);
         }
 
-        // Send immediate Day 1 message
-        await sendDayMessage(chatId, roadmapId, roadmapType, 1);
+        // Send immediate Day 1 message FIRST
+        console.log(`Sending Day 1 to chat ${chatId} for roadmap ${roadmapId}`);
+        const day1Sent = await sendDayMessage(chatId, roadmapId, roadmapType, 1);
+        
+        if (!day1Sent) {
+          console.error(`Failed to send Day 1 to chat ${chatId}`);
+        }
 
+        // Then send welcome message
         await sendTelegramMessage(
           chatId,
           `✅ You're in! This is Day 1 of your roadmap. I'll continue from Day 2 every morning at 8 AM.\n\nUse /status to check your progress or /list to switch roadmaps.`
@@ -371,33 +377,47 @@ async function sendDayMessage(
   roadmapId: string,
   roadmapType: string,
   dayNumber: number
-) {
+): Promise<boolean> {
   try {
+    console.log(`sendDayMessage called: chatId=${chatId}, roadmapId=${roadmapId}, roadmapType=${roadmapType}, dayNumber=${dayNumber}`);
     let dayData: any = null;
 
     if (roadmapType === "custom") {
-      const { data: template } = await supabase
+      console.log(`Fetching custom roadmap template: ${roadmapId}`);
+      const { data: template, error: templateError } = await supabase
         .from("custom_roadmap_templates")
         .select("data")
         .eq("id", roadmapId)
         .single();
 
+      if (templateError) {
+        console.error("Error fetching template:", templateError);
+        return false;
+      }
+
+      console.log("Template fetched:", template ? "found" : "not found");
+
       if (template && (template as any).data?.days) {
-        dayData = (template as any).data.days.find(
-          (d: any) => d.day === dayNumber
-        );
+        const days = (template as any).data.days;
+        console.log(`Found ${days.length} days in template`);
+        dayData = days.find((d: any) => d.day === dayNumber);
+        console.log(`Day ${dayNumber} data:`, dayData ? "found" : "not found");
+      } else {
+        console.error("Template data structure invalid:", template);
       }
     } else {
       // For now, only custom roadmaps are supported for day messages
-      return;
+      console.log("Standard roadmaps not supported yet");
+      return false;
     }
 
     if (!dayData) {
+      console.error(`Day ${dayNumber} not found for roadmap ${roadmapId}`);
       await sendTelegramMessage(
         chatId,
         `Unable to find Day ${dayNumber} for this roadmap. Please try again later.`
       );
-      return;
+      return false;
     }
 
     let message = `📅 <b>Day ${dayNumber}</b>\n\n`;
@@ -450,9 +470,13 @@ async function sendDayMessage(
 
     message += `\n💪 Good luck with today's tasks!`;
 
-    await sendTelegramMessage(chatId, message);
+    console.log(`Sending Day ${dayNumber} message to chat ${chatId}`);
+    const sent = await sendTelegramMessage(chatId, message);
+    console.log(`Day ${dayNumber} message sent:`, sent);
+    return sent;
   } catch (error) {
     console.error("Error sending day message:", error);
+    return false;
   }
 }
 
